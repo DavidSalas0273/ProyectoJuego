@@ -76,18 +76,15 @@ public class PlayerController : MonoBehaviour
 
         if (direccion.magnitude >= 0.1f)
         {
-            // Movimiento relativo al mundo, no a la cámara
-            float angulo = Mathf.Atan2(direccion.x, direccion.z) * Mathf.Rad2Deg;
+            float angulo = Mathf.Atan2(direccion.x, direccion.z) * Mathf.Rad2Deg + Camera.main.transform.eulerAngles.y;
 
-            // Solo rotar cuando se mueve hacia adelante
             if (z >= 0)
             {
                 float anguloSuave = Mathf.LerpAngle(transform.eulerAngles.y, angulo, suavizadoRotacion * Time.deltaTime);
                 transform.rotation = Quaternion.Euler(0f, anguloSuave, 0f);
             }
 
-            // Movimiento directo en las direcciones del mundo
-            Vector3 movimiento = new Vector3(direccion.x, 0f, direccion.z);
+            Vector3 movimiento = Quaternion.Euler(0f, angulo, 0f) * Vector3.forward;
             controller.Move(movimiento * velocidadActual * Time.deltaTime);
         }
 

@@ -1,8 +1,8 @@
 using UnityEngine;
 
 /// <summary>
-/// Cámara third-person que sigue al personaje desde el hombro.
-/// Se posiciona detrás y ligeramente arriba del objetivo, sin control del usuario.
+/// Cámara third-person que sigue al personaje automáticamente.
+/// Se posiciona detrás y arriba del objetivo, sin control del usuario.
 /// </summary>
 public class Camara : MonoBehaviour
 {
@@ -10,24 +10,21 @@ public class Camara : MonoBehaviour
     public Transform objetivo;
 
     [Header("Posición relativa")]
-    public float distancia  = 4f;    // distancia detrás del personaje
-    public float altura     = 1.8f;  // altura sobre el personaje
-    public float offsetLateral = 0.5f; // desplazamiento lateral (hombro)
-    public float suavizado  = 10f;   // qué tan suave sigue al personaje
+    public float distancia  = 5f;    // distancia detrás del personaje
+    public float altura     = 2.5f;  // altura sobre el personaje
+    public float suavizado  = 8f;    // qué tan suave sigue al personaje
 
     [Header("Punto de mira")]
-    public float alturaMira = 1.6f;  // a qué altura del personaje mira la cámara
-    public float offsetMiraAdelante = 2f; // mira un poco adelante del personaje
+    public float alturaMira = 1.4f;  // a qué altura del personaje mira la cámara
 
     void LateUpdate()
     {
         if (objetivo == null) return;
 
-        // Posición deseada: detrás, arriba y ligeramente al lado del personaje
+        // Posición deseada: detrás y arriba del personaje según su rotación
         Vector3 posicionDeseada = objetivo.position
                                 - objetivo.forward * distancia
-                                + Vector3.up * altura
-                                + objetivo.right * offsetLateral;
+                                + Vector3.up * altura;
 
         // Suavizar movimiento
         transform.position = Vector3.Lerp(
@@ -36,12 +33,7 @@ public class Camara : MonoBehaviour
             suavizado * Time.deltaTime
         );
 
-        // Punto de mira: ligeramente adelante y arriba del personaje
-        Vector3 puntoMira = objetivo.position 
-                          + Vector3.up * alturaMira
-                          + objetivo.forward * offsetMiraAdelante;
-
-        // Mirar hacia el punto de mira
-        transform.LookAt(puntoMira);
+        // Siempre mirar hacia la cabeza del personaje
+        transform.LookAt(objetivo.position + Vector3.up * alturaMira);
     }
 }
