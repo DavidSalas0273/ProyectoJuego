@@ -1,0 +1,23 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+  <ui:Style src="MainMenu.uss" />
+  <ui:VisualElement name="root" class="root">
+    <ui:VisualElement name="overlay" class="overlay" />
+    <ui:Label name="title" class="title" text="DUNGEONS &amp; SWORD" />
+    <ui:Label name="subtitle" class="subtitle" text="Una aventura de mazmorras te espera" />
+    <ui:VisualElement name="btn-container" class="btn-container">
+      <ui:Button name="btn-play" class="menu-btn" text="JUGAR" />
+      <ui:Button name="btn-options" class="menu-btn" text="OPCIONES" />
+      <ui:Button name="btn-quit" class="menu-btn" text="SALIR" />
+    </ui:VisualElement>
+    <ui:Label name="version" class="version" text="v0.1 Alpha" />
+    <ui:VisualElement name="options-panel" class="options-panel">
+      <ui:Label class="options-title" text="OPCIONES" />
+      <ui:Label class="options-label" text="Volumen Musica" />
+      <ui:Slider name="slider-music" class="options-slider" low-value="0" high-value="1" value="0.8" />
+      <ui:Label class="options-label" text="Volumen SFX" />
+      <ui:Slider name="slider-sfx" class="options-slider" low-value="0" high-value="1" value="1" />
+      <ui:Toggle name="toggle-fullscreen" label="Pantalla Completa" class="options-label" value="true" />
+      <ui:Button name="btn-back" class="back-btn" text="VOLVER" />
+    </ui:VisualElement>
+  </ui:VisualElement>
+</ui:UXML>
