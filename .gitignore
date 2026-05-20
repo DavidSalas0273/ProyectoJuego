@@ -73,3 +73,6 @@ crashlytics-build.properties
 
 # MCP and Claude files
 mcp_call.ps1
+
+# Large audio files (too big for GitHub)
+Assets/Musica/*.mp3
